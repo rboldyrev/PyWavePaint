@@ -7,54 +7,25 @@ progres = 0 #Начальный прогресс рендера анимации
 N = 400 #Размер сетки, наример 400 на 400  
 k = 0.5 #Коэффициент пружин  
 temp = 0 #Переменная, которая является cщетчиком при выборе частоты создание волн  
-a = N // 2 + 20 # Для определения положения источника волны  
-с = N // 2 - 20 # Для определения положения источнка волны 
+a = N // 2 + 20 # Для определния положения источника волны 1
+с = N // 2 - 20 # Для определния положения источника волны 2
   
-amplitude = N # Амплитудное значение волны  
+amplitude = N * 1 # Амплитудное значение волны  
   
 #Объявляем массивы  
 speed = np.zeros((N, N)) #Скорость каждой частицы с координатами x,y  
 grid = np.zeros((N, N))  #Значение компоненты z каждой частицы с координатами x,y  
 stan = np.zeros((N, N)) #Если 0, то частица может двигаться, если 1, то частицу невозможно сдвинуть(бесконечная масса)  
+force = np.zeros((N, N))
   
-  
-#Создаем источник волны 1  
-grid[N // 2, a] = amplitude  
-grid[N // 2 - 1, a] = amplitude  
-grid[N // 2 + 1, a] = amplitude  
-grid[N // 2, a + 1] = amplitude  
-grid[N // 2, a - 1] = amplitude  
-grid[N // 2 + 2, a] = amplitude  
-grid[N // 2 + 2, a - 1] = amplitude  
-grid[N // 2 + 2, a + 1] = amplitude  
-grid[N // 2 - 2, a] = amplitude  
-grid[N // 2 - 2, a + 1] = amplitude  
-grid[N // 2 - 2, a - 1] = amplitude  
-grid[N // 2, a + 2] = amplitude  
-grid[N // 2 - 1, a + 2] = amplitude  
-grid[N // 2 + 1, a + 2] = amplitude  
-grid[N // 2, a - 2] = amplitude  
-grid[N // 2 - 1, a - 2] = amplitude  
-grid[N // 2 + 1, a - 2] = amplitude  
-  
-#Создаем источник волны 2  
-grid[N // 2, с] = amplitude  
-grid[N // 2 - 1, с] = amplitude  
-grid[N // 2 + 1, с] = amplitude  
-grid[N // 2, с + 1] = amplitude  
-grid[N // 2, с - 1] = amplitude  
-grid[N // 2 + 2, с] = amplitude  
-grid[N // 2 + 2, с - 1] = amplitude  
-grid[N // 2 + 2, с + 1] = amplitude  
-grid[N // 2 - 2, с] = amplitude  
-grid[N // 2 - 2, с + 1] = amplitude  
-grid[N // 2 - 2, с - 1] = amplitude  
-grid[N // 2, с + 2] = amplitude  
-grid[N // 2 - 1, с + 2] = amplitude  
-grid[N // 2 + 1, с + 2] = amplitude  
-grid[N // 2, с - 2] = amplitude  
-grid[N // 2 - 1, с - 2] = amplitude  
-grid[N // 2 + 1, с - 2] = amplitude  
+#Создаем волну 1
+for i in range(-2, 3):
+    for j in range(-2, 3):
+        grid[np.roll(N // 2, i), np.roll(a, j)] = amplitude 
+#Создаем волну 2
+for i in range(-2, 3):
+    for j in range(-2, 3):
+        grid[np.roll(N // 2, i), np.roll(с, j)] = amplitude
   
 #Основная функция, котрая вызывается на каждом шагу  
 def update(data):  
@@ -65,67 +36,35 @@ def update(data):
   
     progres += 1 #Считаем прогресс на каждом шаге  
   
-    #Раз в 30 шагов вызываем волну    if temp == 30:  
-    grid[N // 2, a] = amplitude  
-    grid[N // 2 - 1, a] = amplitude  
-    grid[N // 2 + 1, a] = amplitude  
-    grid[N // 2, a + 1] = amplitude  
-    grid[N // 2, a - 1] = amplitude  
-    grid[N // 2 + 2, a] = amplitude  
-    grid[N // 2 + 2, a - 1] = amplitude  
-    grid[N // 2 + 2, a + 1] = amplitude  
-    grid[N // 2 - 2, a] = amplitude  
-    grid[N // 2 - 2, a + 1] = amplitude  
-    grid[N // 2 - 2, a - 1] = amplitude  
-    grid[N // 2, a + 2] = amplitude  
-    grid[N // 2 - 1, a + 2] = amplitude  
-    grid[N // 2 + 1, a + 2] = amplitude  
-    grid[N // 2, a - 2] = amplitude  
-    grid[N // 2 - 1, a - 2] = amplitude  
-    grid[N // 2 + 1, a - 2] = amplitude  
+    #Раз в 30 шагов вызываем волну
+    if temp == 30:  
+        for i in range(-2, 3):
+            for j in range(-2, 3):
+                grid[np.roll(N // 2, i), np.roll(a, j)] = amplitude 
 
-    grid[N // 2, с] = amplitude  
-    grid[N // 2 - 1, с] = amplitude  
-    grid[N // 2 + 1, с] = amplitude  
-    grid[N // 2, с + 1] = amplitude  
-    grid[N // 2, с - 1] = amplitude  
-    grid[N // 2 + 2, с] = amplitude  
-    grid[N // 2 + 2, с - 1] = amplitude  
-    grid[N // 2 + 2, с + 1] = amplitude  
-    grid[N // 2 - 2, с] = amplitude  
-    grid[N // 2 - 2, с + 1] = amplitude  
-    grid[N // 2 - 2, с - 1] = amplitude  
-    grid[N // 2, с + 2] = amplitude  
-    grid[N // 2 - 1, с + 2] = amplitude  
-    grid[N // 2 + 1, с + 2] = amplitude  
-    grid[N // 2, с - 2] = amplitude  
-    grid[N // 2 - 1, с - 2] = amplitude  
-    grid[N // 2 + 1, с - 2] = amplitude  
-    temp = 0  
-  
-    #Пробегаем по каждой частице, считаем в них физику  
-    for i in range(N - 1):  
-        for j in range(N - 1):  
-            #Считаем силу, по формулам, которые выразили ранее  
-            Force = k * (grid[i + 1, j] + grid[i, j + 1] + grid[i - 1, j] + grid[i, j - 1] - 4 * grid[i, j])  
-            #Считаем скорость, по формулам, которые выразили ранее  
-            speed[i, j] = speed[i, j] + Force  
-            #Считаем скорость, по формулам, которые выразили ранее  
-            new_grid[i, j] = grid[i, j] + speed[i, j] * (1 - stan[i, j])  
-    grid = new_grid  
+        for i in range(-2, 3):
+            for j in range(-2, 3):
+                grid[np.roll(N // 2, i), np.roll(с, j)] = amplitude
+        temp = 0  
+
+    force = k * (np.roll(grid, 1, axis=0) + np.roll(grid, 1, axis=1) +
+             np.roll(grid, -1, axis=0) + np.roll(grid, -1, axis=1) - 4 * grid)
+    speed = speed + force
+    grid = grid + speed * (1 - stan) 
     mat.set_data(grid)  
     return [mat]  
   
 fig, ax = plt.subplots()  
+ax.set_axis_off() #убираем оси
 #Цветовая раскраска карты  
 cmap = 'inferno'  
 mat = ax.matshow(grid, cmap=cmap)  
-fps = 1 
-second = 2  
-dpi = 500  
+fps = 15  
+second = 30
+dpi = 200 
 frame_all = fps * second  
   
 #Основной цикл анимации  
-ani = animation.FuncAnimation(fig, update, frames=range(frame_all), save_count=50, repeat=True, interval=2)  
-ani.save('2 источника.mp4', fps=fps, dpi=dpi)  
+ani = animation.FuncAnimation(fig, update, frames=range(frame_all), save_count=50, repeat=True)  
+ani.save('result_color_map.mp4', fps=fps, dpi=dpi)
 print('Done!')
