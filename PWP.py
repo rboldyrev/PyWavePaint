@@ -52,6 +52,7 @@ def update(data):
     speed = speed + force
     grid = grid + speed * (1 - stan) 
     mat.set_data(grid)  
+    mat.set_clim(vmin=0, vmax=75)
     return [mat]  
   
 fig, ax = plt.subplots()  
