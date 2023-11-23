@@ -4,11 +4,11 @@ import matplotlib.animation as animation
   
 # Объявляем переменные  
 progres = 0 #Начальный прогресс рендера анимации  
-N = 400 #Размер сетки, наример 400 на 400  
+N = 1000 #Размер сетки, наример N на N  
 k = 0.5 #Коэффициент пружин  
 temp = 0 #Переменная, которая является cщетчиком при выборе частоты создание волн  
-a = N // 2 + 20 # Для определния положения источника волны 1
-с = N // 2 - 20 # Для определния положения источника волны 2
+a = N // 2 + 50 # Для определния положения источника волны 1
+с = N // 2 - 50 # Для определния положения источника волны 2
   
 x_max = N // 4 # Определяем границы оси x, при x = N // 2 -- полный экран
 y_max = N // 4 # Определяем границы оси y, при y = N // 2 -- полный экран
@@ -39,8 +39,8 @@ def update(data):
   
     progres += 1 #Считаем прогресс на каждом шаге  
   
-    #Раз в 30 шагов вызываем волну
-    if temp == 30:  
+    #Раз в 50 шагов вызываем волну
+    if temp == 50:  
         for i in range(-2, 3):
             for j in range(-2, 3):
                 grid[np.roll(N // 2, i), np.roll(a, j)] = amplitude 
@@ -55,7 +55,7 @@ def update(data):
     speed = speed + force
     grid = grid + speed * (1 - stan) 
     mat.set_data(grid)  
-    mat.set_clim(vmin=0, vmax=75)
+    mat.set_clim(vmin=0, vmax=100)
     return [mat]  
   
 fig, ax = plt.subplots()  
@@ -69,7 +69,7 @@ cmap = 'inferno'
 mat = ax.matshow(grid, cmap=cmap)  
 fps = 15  
 second = 30
-dpi = 200 
+dpi = 120 
 frame_all = fps * second  
   
 #Основной цикл анимации  
