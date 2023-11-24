@@ -69,5 +69,5 @@ frame_all = fps * second
   
 #Основной цикл анимации  
 ani = animation.FuncAnimation(fig, update, frames=range(frame_all), save_count=50, repeat=True)  
-ani.save('result_color_map_3d.gif', fps=fps, dpi=dpi)
+ani.save('PWP_3d.gif', fps=fps, dpi=dpi)
 print('Done!')
