@@ -105,5 +105,5 @@ frame_all = fps * second
   
 #Основной цикл анимации  
 ani = animation.FuncAnimation(fig, update, frames=range(frame_all), repeat=True)  
-ani.save('PWP_graphic_abs.gif', fps=fps, dpi=dpi)
+ani.save('PWP_Difraction_graphic.gif', fps=fps, dpi=dpi)
 print('Done!')
