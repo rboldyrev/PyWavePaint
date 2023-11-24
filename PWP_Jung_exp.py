@@ -72,12 +72,12 @@ cmap_name = 'transparent_to_white'
 cmap_wall = mcolors.LinearSegmentedColormap.from_list(cmap_name, colors, N=256)
 paint_wall = ax.matshow(stan, cmap=cmap_wall)
 
-fps = 20  
-second = 30
-dpi = 101
+fps = 25  
+second = 2
+dpi = 200
 frame_all = fps * second  
   
 #Основной цикл анимации  
 ani = animation.FuncAnimation(fig, update, frames=range(frame_all), save_count=50, repeat=True)  
-ani.save('PWP_Jung_exp.gif', fps=fps, dpi=dpi)
+ani.save('PWP_Jung_exp.mp4', fps=fps, dpi=dpi)
 print('Done!')
